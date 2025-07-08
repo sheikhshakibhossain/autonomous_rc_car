@@ -1,0 +1,106 @@
+<robot name="autonomous_rc_car">
+
+  <!-- Base Platform -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.35 0.30 0.05"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+      </material>
+      <origin xyz="0 0 0.025"/>
+    </visual>
+  </link>
+
+  <!-- Car Body Shell -->
+  <link name="car_shell">
+    <visual>
+      <geometry>
+        <box size="0.35 0.30 0.12"/>
+      </geometry>
+      <material name="white_shell">
+        <color rgba="1.0 1.0 1.0 0.9"/>
+      </material>
+      <origin xyz="0 0 0.13"/>
+    </visual>
+  </link>
+  <joint name="shell_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="car_shell"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+
+  <!-- Left Wheel -->
+  <link name="left_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="0.0425" length="0.025"/>
+      </geometry>
+      <material name="yellow">
+        <color rgba="1.0 1.0 0.0 1.0"/>
+      </material>
+      <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+    </visual>
+  </link>
+  <joint name="left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="left_wheel"/>
+    <origin xyz="0 -0.16 0.0425"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <!-- Right Wheel -->
+  <link name="right_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="0.0425" length="0.025"/>
+      </geometry>
+      <material name="yellow"/>
+      <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+    </visual>
+  </link>
+  <joint name="right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="right_wheel"/>
+    <origin xyz="0 0.16 0.0425"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <!-- Caster Wheel -->
+  <link name="caster_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.025"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
+      <origin xyz="0 0 0"/>
+    </visual>
+  </link>
+  <joint name="caster_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="caster_wheel"/>
+    <origin xyz="0.24 0 0.025"/>
+  </joint>
+
+  <!-- Lidar -->
+  <link name="lidar">
+    <visual>
+      <geometry>
+        <cylinder radius="0.035" length="0.04"/>
+      </geometry>
+      <material name="red">
+        <color rgba="1.0 0.0 0.0 1.0"/>
+      </material>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+    </visual>
+  </link>
+  <joint name="lidar_joint" type="fixed">
+    <parent link="car_shell"/>
+    <child link="lidar"/>
+    <origin xyz="0 0 0.13"/>
+  </joint>
+
+</robot>
